@@ -26,3 +26,14 @@ services:
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
     depends_on:
       - kafka
+
+  spark:
+    image: apache/spark:3.5.3
+    user: root
+    depends_on:
+      - kafka
+    volumes:
+      - ./spark_jobs:/app/spark_jobs
+      - ./lakehouse:/lakehouse
+    profiles: ["jobs"]
+    
